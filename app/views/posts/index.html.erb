@@ -1,0 +1,41 @@
+<% @posts.each do |post| %>
+  <div class="container col-md-offset-3 col-md-6 header">
+    <div class="card-wrap">
+      <div class="card">
+        <div class="card-header align-items-center">
+          <%= link_to user_path(post.user_id), class: "no-text-decoration" do %>
+            <strong><%= post.user.name %></strong>
+          <% end %>
+        </div>
+        <%= link_to post_path(post.id), class: "no-text-decoration" do %>
+          <%= image_tag post.image.medium.url, class: "card-img" %>
+        <% end %>
+        <div class="card-body">
+          <div><%= post.content %></div>
+          <% @favorite = current_user.favorites.find_by(post_id: post.id) if logged_in? %>
+          <div class="row parts">
+            <% if @favorite.present? %>
+            <%= link_to "お気に入り解除",favorite_path(id: @favorite.id),method: :delete,class: "btn btn-danger" %>
+            <% else %>
+            <%= link_to "お気に入り",favorites_path(post_id: post.id), method: :post,class:'btn btn-primary' %>
+            <% end %>
+          </div>
+          <div><strong>「いいね！」<%= post.favorite_users.count %>件</strong></div>
+          <div>
+         
+            <span></span>
+            <%= link_to time_ago_in_words(post.created_at).upcase + "前", "#", class: "post-time no-text-decoration" %>
+            <hr>
+            <div class="row parts">
+              <form action="#" class="w-100">
+                <div>
+                  <textarea class="form-control comment-input border-0" placeholder="コメント..." rows="1"></textarea>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>

@@ -1,0 +1,18 @@
+<div class=" col-md-8 col-md-offset2 mx-auto user-content">
+  <div class="user-profile">
+    <%= image_tag @user.icon, class:"card-img-top" %>
+    <div class="user-body"> 
+      <ul>
+        <li class="user-title"><%= @user.name %></li>
+        <li class="user-btn"><%= link_to "設定",edit_user_path(@user.id),class:"btn btn-primary btn-round " %></li>
+      </ul> 
+    </div> 
+    <div class="user-bio">
+      <p ><%= @user.bio %></p>
+    </div>
+  </div>
+</div>
+
+
+
+
