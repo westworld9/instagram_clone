@@ -21,7 +21,6 @@
             <% end %>
           </div>
           <div><strong>「いいね！」<%= post.favorite_users.count %>件</strong></div>
-          <div>
          
             <span></span>
             <%= link_to time_ago_in_words(post.created_at).upcase + "前", "#", class: "post-time no-text-decoration" %>

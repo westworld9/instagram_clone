@@ -3,6 +3,7 @@
   <h3 class="card-header">新規投稿</h3>
   <div class="card-body">
     <%= form_with(model: @post, local: true) do |f| %>
+     <%= render "errors", obj: f.object %>
     <div class="form-group">
     <%= f.label :画像 %>
     <%= f.file_field :image, class:"form-control"%>

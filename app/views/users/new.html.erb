@@ -4,12 +4,12 @@
       <%= image_tag "/assets/beach.jpg", class:"menu-image" %>
     </div>  
     <div class="col-md-5 sign">
-      <%= render :partial =>"layouts/errors" %>
         <div class="sign-name">
           <h2>Instagram Clone</h2> 
           <p>登録して画像を共有しよう</p>
         </div>
       <%= form_with(model: @user, local: true ) do |f| %> 
+        <%= render "errors", obj: f.object %>
         <div class="form-group">
           <%= f.text_field :name, class:"form-control", placeholder:"名前"%>
         </div>
