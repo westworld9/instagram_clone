@@ -8,7 +8,7 @@
           <% end %>
         </div>
         <%= link_to post_path(post.id), class: "no-text-decoration" do %>
-          <%= image_tag post.image.medium.url, class: "card-img" %>
+          <%= image_tag post.image.url(:medium), class: "card-img" %>
         <% end %>
         <div class="card-body">
           <div><%= post.content %></div>
