@@ -7,7 +7,7 @@
             <strong><%= post.user.name %></strong>
           <% end %>
         </div>
-        <%= link_to post_path(post.id), class: "no-text-decoration" do %>
+        <%= link_to post_path(post.id) do %>
           <%= image_tag post.image.url(:medium), class: "card-img" %>
         <% end %>
         <div class="card-body">
