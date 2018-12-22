@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   before_action :set_user, only:[:show, :edit, :update]
+  before_action :edit_userpost, only:[:edit]
   def new
     @user=User.new
   end
@@ -32,5 +33,12 @@ class UsersController < ApplicationController
   end
   def set_user 
     @user=User.find(params[:id])
+  end
+ 
+  def edit_userpost
+    if @user.id != current_user.id 
+      flash[:notice]="権限がありません"
+      redirect_to posts_path 
+    end
   end
 end

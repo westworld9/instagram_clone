@@ -1,12 +1,17 @@
 class PostsController < ApplicationController 
   before_action :set_post, only:[:show, :edit, :update, :destroy]
-  before_action :login_user, only:[:index, :new, :show, :edit,:destroy]
+  before_action :login_user, only:[:new, :show, :edit,:destroy]
+  before_action :edit_userpost, only:[:edit, :destroy]
   def index
     @posts=Post.all.includes(:user).order(created_at: :desc)
   end
 
   def new
-    @post=Post.new
+    @post=if params[:back]
+            Post.new(post_params)
+          else
+            Post.new
+          end
   end
   def create 
     @post=current_user.posts.build(post_params)
@@ -35,8 +40,16 @@ class PostsController < ApplicationController
     @post.destroy 
     redirect_to posts_path
   end
+  def confirm
+    @post=Post.new(post_params)
+    @post.user_id = current_user.id 
+    render :new if @post.invalid?
+  end
+  
+  private
+  
   def post_params 
-    params.require(:post).permit(:content, :image)
+    params.require(:post).permit(:content, :image,:image_cache )
   end
   def set_post 
     @post=Post.find(params[:id])
@@ -45,6 +58,12 @@ class PostsController < ApplicationController
     if current_user.nil? 
       flash[:notice]="ログインしてください"
       redirect_to new_session_path
+    end
+  end
+  def edit_userpost
+    if @post.user_id != current_user.id 
+      flash[:notice]="権限がありません"
+      redirect_to posts_path 
     end
   end
 end

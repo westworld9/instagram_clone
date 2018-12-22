@@ -4,7 +4,9 @@
     <div class="user-body"> 
       <ul>
         <li class="user-title"><%= @user.name %></li>
+        <% if @user.id == current_user.id %>
         <li class="user-btn"><%= link_to "設定",edit_user_path(@user.id),class:"btn btn-primary btn-round " %></li>
+        <% end %>
       </ul> 
     </div> 
     <div class="user-bio">

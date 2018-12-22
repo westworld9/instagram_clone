@@ -1,0 +1,19 @@
+<div class="col-md-6 offset-md-3 header">
+<h3>以下の内容で投稿してもよろしいですか？</h3>
+<hr> 
+<div class="card">
+  <%= image_tag(@post.image.medium.url,class:"card-img") %>
+<%= form_with(model: @post, url: posts_path, local: true) do |form| %> 
+  <%= form.hidden_field :image_cache %> 
+  <%= form.text_area :content, class: 'form-control', readonly: "readonly" %>
+  <%= form.hidden_field :content %>
+  <%= form.submit "投稿", class: "btn btn-primary"%>
+<% end %>  
+</div>
+
+<%= form_with(model: @post, url:new_post_path, local: true, method:"get") do |form| %>
+  <%= form.hidden_field :content %>
+  <%= form.hidden_field :image_cache %>
+  <%= form.submit "もどる", name: 'back' %> 
+<% end %>
+</div>

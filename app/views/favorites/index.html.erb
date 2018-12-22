@@ -1,0 +1,20 @@
+<div class="container"> 
+  <div class="row">
+    <% if @favorite_posts.present? %>
+    <% @favorite_posts.each do |favorite_posts| %>
+    <div class="col-md-4">
+      <div class="card">
+        <%= image_tag(favorite_posts.image.medium.url,class:"card-img")%>
+        <div class="card-body">
+          <h5><p>投稿者: <%= favorite_posts.user.name %></p></h5>
+          <p class="card-text"><%= favorite_posts.content %></p>
+        </div>
+      </div> 
+    </div>
+    <% end %>
+    <% else %> 
+     <h2>お気に入りはまだありません。</h2>
+  
+    <% end %> 
+  </div>
+</div>

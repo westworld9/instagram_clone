@@ -14,7 +14,14 @@
               title: @post.user.name do %>
               <strong><%= @post.user.name %></strong>
             <% end %>
-            <%= link_to "削除", post_path(@post.id), method: :delete, data: {confirm: '本当に削除していいですか'},class:"btn btn-danger" %>
+            <% if @post.user_id == current_user.id %>
+              <%= link_to edit_post_path(@post.id),class: "icon" do %>
+                <i class="fas fa-cog text-dark"></i>
+              <% end %>
+              <%= link_to post_path(@post.id), method: :delete, data: {confirm: '本当に削除していいですか'},class: "icon"  do %>
+                <i class="fas fa-trash-alt text-dark"></i>
+              <% end %>
+            <% end %>
           </div>
           <div class="m-2">
             <strong>
